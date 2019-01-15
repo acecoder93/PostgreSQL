@@ -254,15 +254,27 @@
 -- WHERE t.name ilike '%JavaScript%';
 
 -- 2) What are all technologies used by the Personal Website?
--- SELECT *
--- FROM tech
--- LEFT OUTER JOIN project_uses_tech ON tech_id = tech.id WHERE project_id = 4;
+-- SELECT t.name
+-- FROM tech t
+-- INNER JOIN project_uses_tech put ON t.id = put.tech_id
+-- INNER JOIN project p ON p.id = put.project_id
+-- WHERE p.name ilike '%Personal Website%'
 
 -- 3 & 4) Perform a left outer join from tech table to the project_uses_tech table; with no associated project & count
 -- SELECT name, count(tech_id)
 -- FROM tech
 -- LEFT OUTER JOIN project_uses_tech ON tech_id = tech.id
 -- GROUP BY tech.id;
+
+SELECT t.name, count (put.tech_id)
+FROM tech t
+LEFT OUTER JOIN project_uses_tech put ON t.id = put.tech_id
+LEFT OUTER JOIN project p ON p.id = put.project_id
+WHERE p.name IS NULL
+GROUP BY t.id
+
+
+
 
 -- 5 & 6) Perform a left outer join from project table to the projects_user_tech table - with no projects associated to tech?
 -- SELECT name, count(project_id)
