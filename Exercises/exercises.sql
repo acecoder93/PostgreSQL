@@ -63,6 +63,7 @@
 -- SELECT name FROM restaurant WHERE distance <= 2;
 
 -- Restuarants that you have not ate in the last week
--- SELECT name FROM restaurant WHERE last_time_you_ate_there = DATEADD(day, -7, GETDATE());
+-- SELECT name FROM restaurant WHERE last_time_you_ate_there > current_date - interval '7 days';
 
 -- Restaurants that you haven't ate in the last week and has 5 stars
+-- SELECT name FROM restaurant WHERE last_time_you_ate_there < current_date - interval '7 days' AND stars = 5;
