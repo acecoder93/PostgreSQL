@@ -40,14 +40,32 @@
 -- SELECT r.review
 -- FROM review r
 -- INNER JOIN restaurant ON r.restaurant_id = restaurant.id
--- WHERE restaurant.id ilike '%%';
+-- WHERE restaurant.id = '%%';
 
 -- 2) List all the reviews for a given restaurant, given a specific restaurant name.
-SELECT r.na
+-- SELECT r.review
+-- FROM review r
+-- INNER JOIN restaurant ON r.restaurant_id = restaurant.id
+-- WHERE restaurant.name ilike '%%';
+
 
 -- 3) List all the reviews for a given reviewer, given a specific author name.
+-- SELECT r.reviews
+-- FROM review r
+-- INNER JOIN reviewer ON r.reviewer_id = reviewer.id
+-- WHERE name ilike '%%';
+
+
 -- 4) List all the reviews along with the restaurant they were written for. In the query result, select the restaurant name and the review text.
+
+
 -- 5) Get the average stars by restaurant. The result should have the restaurant name and its average star rating.
+-- SELECT AVG(r.stars)
+-- FROM review r
+-- INNER JOIN restaurant ON r.restaurant_id = restaurant.id
+-- WHERE name ilike '%%';
+
+
 -- 6) Get the number of reviews written for each restaurant. The result should have the restaurant name and its review count.
 -- 7) List all the reviews along with the restaurant, and the reviewer's name. The result should have the restaurant name, the review text, and the reviewer name. Hint: you will need to do a three-way join - i.e. joining all three tables together.
 -- 8) Get the average stars given by each reviewer. (reviewer name, average star rating)
