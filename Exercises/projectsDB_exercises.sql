@@ -261,25 +261,50 @@
 -- WHERE p.name ilike '%Personal Website%'
 
 -- 3 & 4) Perform a left outer join from tech table to the project_uses_tech table; with no associated project & count
--- SELECT name, count(tech_id)
--- FROM tech
--- LEFT OUTER JOIN project_uses_tech ON tech_id = tech.id
--- GROUP BY tech.id;
-
-SELECT t.name, count (put.tech_id)
-FROM tech t
-LEFT OUTER JOIN project_uses_tech put ON t.id = put.tech_id
-LEFT OUTER JOIN project p ON p.id = put.project_id
-WHERE p.name IS NULL
-GROUP BY t.id
+-- SELECT t.name, count (put.tech_id)
+-- FROM tech t
+-- LEFT OUTER JOIN project_uses_tech put ON t.id = put.tech_id
+-- LEFT OUTER JOIN project p ON p.id = put.project_id
+-- WHERE p.name IS NULL
+-- GROUP BY t.id
 
 
 
 
--- 5 & 6) Perform a left outer join from project table to the projects_user_tech table - with no projects associated to tech?
--- SELECT name, count(project_id)
--- FROM project
--- LEFT OUTER JOIN project_uses_tech ON project.id = project_id
--- GROUP BY project.id
+-- 5 & 6) Perform a left outer join from project table to the projects_user_tech table - with no associated tech?
+-- SELECT p.name, count (put.project_id)
+-- from project p
+-- LEFT OUTER JOIN project_uses_tech put ON p.id = put.project_id
+-- LEFT OUTER JOIN tech t ON t.id = put.tech_id
+-- WHERE t.name is NULL
+-- GROUP BY p.id
+
 
 -- 7) List all projects along with each technology used by it. Need a three-way join
+-- SELECT p.name, t.name
+-- FROM project p
+-- INNER JOIN project_uses_tech put ON p.id = put.project_id
+-- INNER JOIN tech t ON t.id = put.tech_id
+
+
+-- 8) List all the distinct techs that are used by at least one project.
+-- SELECT DISTINCT t.name
+-- FROM tech t
+-- INNER JOIN project_uses_tech put ON t.id = put.tech_id
+-- INNER JOIN project p ON p.id = put.project_id
+-- WHERE p.name ilike '%Phone Book%'
+
+-- 9) List all the distinct techs that are not used by any projects.
+SELECT DISTINCT t.name
+FROM tech t
+RIGHT OUTER JOIN project_uses_tech put ON t.id = put.tech_id
+RIGHT OUTER JOIN project p ON p.id = put.project_id
+WHERE p.id IS NULL
+
+
+
+-- 10) List all the distinct projects that use at least one tech.
+-- 11) List all the distinct projects that use no tech.
+-- 12) Order the projects by how many tech it uses.
+-- 13) Order the tech by how many projects use it.
+-- 14) What is the average number of techs used by a project?
